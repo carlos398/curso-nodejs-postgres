@@ -1,6 +1,8 @@
 const faker = require('faker');
 const boom = require('@hapi/boom');
 
+const sequalize = require('../libs/sequalize')
+
 class ProductsService {
 
   constructor(){
@@ -30,8 +32,10 @@ class ProductsService {
     return newProduct;
   }
 
-  find() {
-    return this.products;
+  async find() {
+    const query = 'SELECT * FROM task'
+    const [data, metadata] = await sequalize.query(query)
+    return data;
   }
 
   async findOne(id) {
